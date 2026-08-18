@@ -1,5 +1,7 @@
-package aula2;
+package aula2_18_08_2026;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.util.Scanner;
 
@@ -54,14 +56,52 @@ public class App {
      * @return Um vetor com os produtos carregados, ou vazio em caso de problemas de leitura.
      */
     static Produto[] lerProdutos(String nomeArquivoDados) {
-		return null;
-    	
+
+        Produto[] produtos = new Produto[MAX_NOVOS_PRODUTOS];
+        try {
+            File arquivo = new File(nomeArquivoDados);
+            Scanner leitor = new Scanner(arquivo);
+
+            int quantidade = Integer.parseInt(leitor.nextLine());
+
+            if (quantidade <= 0 || quantidade > MAX_NOVOS_PRODUTOS) {
+                leitor.close();
+                quantosProdutos = 0;
+                return produtos;
+            }
+
+            for (int i = 0; i < quantidade; i++) {
+                String linha = leitor.nextLine();
+                produtos[i] = Produto.criarDoTexto(linha);
+            }
+
+            quantosProdutos = quantidade;
+
+            leitor.close();
+
+            return produtos;
+        } catch (Exception e) {
+            quantosProdutos = 0;
+            return produtos;
+        }
     }
     
     /** Localiza um produto no vetor de produtos cadastrados, a partir do nome de produto informado pelo usuário, e imprime seus dados. 
      *  A busca não é sensível ao caso. Em caso de não encontrar o produto, imprime uma mensagem padrão */
     static void localizarProdutos() {
-             
+
+        System.out.print("Digite o nome do produto: ");
+        String nome = teclado.nextLine();
+
+        for (int i = 0; i < quantosProdutos; i++) {
+
+            if (produtosCadastrados[i].descricao.equalsIgnoreCase(nome)) {
+                System.out.println(produtosCadastrados[i]);
+                return;
+            }
+        }
+
+        System.out.println("Produto não encontrado.");
     }
     
     /**
@@ -69,7 +109,21 @@ public class App {
      * @param nomeArquivo Nome do arquivo a ser gravado.
      */
     public static void salvarProdutos(String nomeArquivo) {
-    
+        try {
+
+            PrintWriter gravador = new PrintWriter(nomeArquivo);
+
+            gravador.println(quantosProdutos);
+
+            for (int i = 0; i < quantosProdutos; i++) {
+                gravador.println(produtosCadastrados[i].gerarDadosTexto());
+            }
+
+            gravador.close();
+
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar o arquivo.");
+        }
     }
     
     /** Lista todos os produtos cadastrados, numerados, um por linha */

@@ -1,9 +1,9 @@
-package aula2;
+package aula2_18_08_2026;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class ProdutoPerecivel extends Produto{
+public class ProdutoPerecivel extends Produto {
 
 	/** Desconto para proximidade de validade: 25% */
 	private static final double DESCONTO = 0.25;
@@ -13,6 +13,8 @@ public class ProdutoPerecivel extends Produto{
 	
 	/** Data de validade do produto. Não pode ser anterior à data da criação ou venda do produto. */
 	private LocalDate dataDeValidade;
+
+	DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	/**
      * Construtor completo. 
@@ -56,7 +58,7 @@ public class ProdutoPerecivel extends Produto{
      * @return Valor de venda do produto (double, positivo)
      */
 	@Override
-	public double valorDeVenda() {
+	public double valorDeVenda(){
 		
 		double precoVenda;
 		
@@ -81,22 +83,19 @@ public class ProdutoPerecivel extends Produto{
      */
     @Override
     public String toString(){
-    	
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        
         String dados = super.toString();
         dados += "\nVálido até " + formato.format(dataDeValidade);
         
         return dados;
     }
-    
-    /**
+
+	/**
      * Gera uma linha de texto a partir dos dados do produto. Preço e margem de lucro são formatados com 2 casas decimais.
      * Data de validade é formatada no formato dd/mm/aaaa
      * @return Uma string no formato "2;descrição;preçoDeCusto;margemDeLucro;dataDeValidade"
      */
 	@Override
     public String gerarDadosTexto() {
-		return null;
+		return String.format("1;%s;%.2f;%.2f;%s",descricao,precoCusto,margemLucro,dataDeValidade.format(formato));
 	}
 }

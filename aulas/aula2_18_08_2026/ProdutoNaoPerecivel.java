@@ -1,4 +1,4 @@
-package aula2;
+package aula2_18_08_2026;
 
 public class ProdutoNaoPerecivel extends Produto{
 
@@ -38,6 +38,6 @@ public class ProdutoNaoPerecivel extends Produto{
      */
 	@Override
     public String gerarDadosTexto() {
-    	return null;
+    	return String.format("1;%s;%.2f;%.2f",descricao,precoCusto,margemLucro);
     }
 }
