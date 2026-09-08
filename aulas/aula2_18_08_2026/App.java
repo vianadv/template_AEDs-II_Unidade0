@@ -128,7 +128,7 @@ public class App {
     
     /** Lista todos os produtos cadastrados, numerados, um por linha */
     static void listarTodosOsProdutos() {
-    	
+        
     }
     
     /**
