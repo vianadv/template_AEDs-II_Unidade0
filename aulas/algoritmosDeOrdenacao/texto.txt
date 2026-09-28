@@ -1,0 +1,130 @@
+================================================================================
+TABELA COMPARATIVA DE COMPLEXIDADE TETA (Θ)
+================================================================================
+
+ALGORITMO       | MELHOR CASO | CASO MÉDIO | PIOR CASO  | MEMÓRIA EXTRA | ESTÁVEL?
+----------------+-------------+------------+------------+---------------+---------
+Bubble Sort     | Θ(n)        | Θ(n²)      | Θ(n²)      | Θ(1)          | Sim
+Selection Sort  | Θ(n²)       | Θ(n²)      | Θ(n²)      | Θ(1)          | Não
+Insertion Sort  | Θ(n)        | Θ(n²)      | Θ(n²)      | Θ(1)          | Sim
+Merge Sort      | Θ(n log n)  | Θ(n log n) | Θ(n log n) | Θ(n)          | Sim
+Quick Sort      | Θ(n log n)  | Θ(n log n) | Θ(n²)      | Θ(log n)      | Não
+
+--------------------------------------------------------------------------------
+DICA RÁPIDA DE PROVA: O que significa ser "Estável"?
+Significa que se a lista tiver números repetidos (ex: dois números 5), eles vão
+manter a mesma ordem original entre si depois que o vetor for ordenado.
+================================================================================
+
+
+================================================================================
+RESUMO TEÓRICO DAS IDEIAS (PARA COLAR NO BLOCO DE NOTAS)
+================================================================================
+
+1. BUBBLE SORT (Bolha)
+- A IDEIA: Compara de dois em dois vizinhos. Se o da esquerda for maior que o da
+  direita, eles trocam. O maior número vai "flutuando" igual uma bolha até o fim.
+- PROVA: É o mais lento de todos. Só serve se a lista já estiver ordenada (Melhor Caso).
+
+2. SELECTION SORT (Seleção)
+- A IDEIA: Olha o vetor inteiro, acha o menor número de todos e joga pro começo.
+  Depois olha o resto, acha o segundo menor e põe no segundo lugar. Ele vai
+  "selecionando" o menor.
+- PROVA: Ele é "burro". Mesmo se a lista já vier organizada, ele roda todos os
+  loops até o final. Por isso é sempre Θ(n²).
+
+3. INSERTION SORT (Inserção)
+- A IDEIA: Igual organizar cartas de baralho na mão. Você pega uma carta nova e
+  vai empurrando as maiores para a direita até achar o buraco certo para inserir ela.
+- PROVA: Excelente e super rápido para listas pequenas ou que já estão quase
+  totalmente ordenadas.
+
+4. MERGE SORT (Mistura)
+- A IDEIA: Usa "Dividir para Conquistar". Corta a lista no meio várias vezes até
+  ficar com vários pedaços de 1 número só. Depois vem juntando os pedaços de dois
+  em dois, mas já organizando na hora de colar.
+- PROVA: Tempo garantido! Demora exatamente a mesma coisa em qualquer situação
+  Θ(n log n). Ruim porque gasta memória criando listas reservas.
+
+5. QUICK SORT (Rápido)
+- A IDEIA: Escolhe um número como PIVÔ (geralmente o último). Joga todo mundo menor
+  que o pivô para a esquerda dele e os maiores para a direita. Depois faz a mesma
+  coisa nos pedaços que sobraram.
+- PROVA: É o mais rápido na prática. O Pior Caso Θ(n²) só acontece se você escolher
+  um pivô muito ruim (tipo pegar o último elemento de uma lista que já estava ordenada).
+================================================================================
+-----------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+================================================================================
+COMO FAZER O TESTE DE MESA DO BUBBLE SORT (PASSO A PASSO NO PAPEL)
+================================================================================
+
+O professor vai te dar um vetor bagunçado, por exemplo: [4, 2, 5, 1]
+A regra do Bubble Sort é: Compare em duplas. Se o da esquerda for MAIOR, TROCA.
+
+Para fazer no papel, desenhe o vetor a cada troca. Veja a simulação completa:
+
+VETOR INICIAL: [ 4, 2, 5, 1 ]
+
+--------------------------------------------------------------------------------
+RODADA 1 (Empurrando o maior para o final)
+--------------------------------------------------------------------------------
+Passo 1: Compara a 1ª dupla (4 e 2).
+         4 é maior que 2? SIM! -> TROCA.
+         Vetor fica: [ 2, 4, 5, 1 ]
+                      ^^^^
+
+Passo 2: Compara a 2ª dupla (4 e 5).
+         4 é maior que 5? NÃO! -> NÃO TROCA.
+         Vetor fica igual: [ 2, 4, 5, 1 ]
+                               ^^^^
+
+Passo 3: Compara a 3ª dupla (5 e 1).
+         5 é maior que 1? SIM! -> TROCA.
+         Vetor fica: [ 2, 4, 1, [5] ]
+                                ^^^^
+* Pronto! O número 5 (o maior de todos) chegou no final. Ele está travado ali.
+
+--------------------------------------------------------------------------------
+RODADA 2 (Olhando o que sobrou, ignorando o 5)
+--------------------------------------------------------------------------------
+Vetor atual: [ 2, 4, 1, [5] ]
+
+Passo 1: Compara (2 e 4).
+         2 é maior que 4? NÃO! -> NÃO TROCA.
+         Vetor fica igual: [ 2, 4, 1, [5] ]
+                            ^^^^
+
+Passo 2: Compara (4 e 1).
+         4 é maior que 1? SIM! -> TROCA.
+         Vetor fica: [ 2, 1, [4, 5] ]
+                             ^^^^
+* Pronto! O 4 e o 5 estão travados no final em suas posições certas.
+
+--------------------------------------------------------------------------------
+RODADA 3 (Olhando os últimos dois números que faltam)
+--------------------------------------------------------------------------------
+Vetor atual: [ 2, 1, [4, 5] ]
+
+Passo 1: Compara (2 e 1).
+         2 é maior que 1? SIM! -> TROCA.
+         Vetor fica: [ 1, [2, 4, 5] ]
+                      ^^^^
+
+VETOR FINAL ORDENADO: [ 1, 2, 4, 5 ]
+
+================================================================================
+DICA DE OURO PARA A PROVA: O QUE DESENHAR NA FOLHA?
+================================================================================
+1. Desenhe o vetor quadrado por quadrado.
+2. Faça uma setinha ligando os dois números que você está comparando.
+3. Se eles trocarem, desenhe o vetor atualizado embaixo.
+4. Se eles NÃO trocarem, escreva "Não troca" e passe para a próxima dupla.
+================================================================================
