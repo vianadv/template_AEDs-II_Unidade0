@@ -128,3 +128,89 @@ DICA DE OURO PARA A PROVA: O QUE DESENHAR NA FOLHA?
 3. Se eles trocarem, desenhe o vetor atualizado embaixo.
 4. Se eles NÃO trocarem, escreva "Não troca" e passe para a próxima dupla.
 ================================================================================
+
+
+// ===============================
+// COMPARAÇÃO POR STRING
+// ordem alfabética crescente
+if (a.getNome().compareToIgnoreCase(b.getNome()) > 0) {
+    // trocar
+}
+
+// ordem alfabética decrescente
+if (a.getNome().compareToIgnoreCase(b.getNome()) < 0) {
+    // trocar
+}
+
+// ===============================
+// COMPARAÇÃO POR DATA
+// LocalDate
+if (a.getData().isAfter(b.getData())) {
+    // trocar para crescente
+}
+
+// ou
+if (a.getData().compareTo(b.getData()) > 0) {
+    // trocar
+}
+
+// ===============================
+// DATA + NOME COMO DESEMPATE
+
+private static int comparar(Evento a, Evento b) {
+
+    int c = a.getData().compareTo(b.getData());
+
+    if (c != 0) {
+        return c;
+    }
+
+    return a.getNome()
+            .compareToIgnoreCase(b.getNome());
+}
+
+// BUBBLE
+if (comparar(v[j], v[j + 1]) > 0) {
+    // troca
+}
+
+
+// SELECTION
+if (comparar(v[j], v[menor]) < 0) {
+    menor = j;
+}
+
+
+// INSERTION
+while (j >= 0 && comparar(v[j], chave) > 0) {
+    v[j + 1] = v[j];
+    j--;
+}
+
+// MERGE
+if (comparar(v[i], v[j]) <= 0) {
+    // pega da esquerda
+} else {
+    // pega da direita
+}
+
+
+
+// QUICK
+if (comparar(v[j], pivo) <= 0) {
+    // elemento vai para o lado esquerdo
+}
+
+
+int[] encontrados = new int[vetor.length];
+int qtd = 0;
+
+for (int i = 0; i < vetor.length; i++) {
+
+    if (vetor[i] >= minimo &&
+        vetor[i] <= maximo) {
+
+        encontrados[qtd] = vetor[i];
+        qtd++;
+    }
+}
